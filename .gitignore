@@ -1,0 +1,20 @@
+venv/
+__pycache__/
+.ipynb_checkpoints/
+*.pyc
+
+# Jupyter
+*.ipynb_checkpoints
+
+# Generated plots/results
+results/plots/*.png
+results/reports/*.pdf
+
+# Environment files
+.env
+
+# macOS
+.DS_Store
+
+# VS Code
+.vscode/
