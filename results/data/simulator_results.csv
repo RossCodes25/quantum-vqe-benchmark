@@ -1,0 +1,2 @@
+system,method,backend,optimizer,exact_energy_hartree,vqe_energy_hartree,absolute_error_hartree,optimal_theta,iterations
+H2,VQE,ideal_statevector,COBYLA,-1.8572750302023795,-1.8572750257726858,4.429693722940442e-09,-0.22343281250000002,23

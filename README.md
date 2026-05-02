@@ -71,15 +71,9 @@ quantum-vqe-benchmark/
 
 ## Current Status
 
-Initial benchmark framework complete.
-
-First milestone:
-
-- build H₂ Hamiltonian
-- compute exact ground-state energy
-- run first VQE simulation
-- compare VQE energy with exact result
-
+- Implemented exact diagonalisation benchmark for H₂
+- Implemented first ideal-statevector VQE simulation
+- Achieved VQE error of approximately 4.43 × 10⁻⁹ Hartree against exact diagonalisation
 ---
 
 ## Planned Analysis

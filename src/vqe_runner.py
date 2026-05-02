@@ -1,4 +1,6 @@
 import numpy as np
+from pathlib import Path
+import pandas as pd
 from scipy.optimize import minimize
 from qiskit.quantum_info import Statevector, SparsePauliOp
 
@@ -56,6 +58,8 @@ if __name__ == "__main__":
     exact_energy, _ = exact_ground_state_energy(h2_hamiltonian())
     result = run_vqe()
 
+    absolute_error = abs(result.fun - exact_energy)
+
     print("\nExact H2 Ground-State Energy:")
     print(exact_energy)
 
@@ -66,4 +70,22 @@ if __name__ == "__main__":
     print(result.x)
 
     print("\nAbsolute Error:")
-    print(abs(result.fun - exact_energy))
+    print(absolute_error)
+
+    output_path = Path("results/data/simulator_results.csv")
+
+    df = pd.DataFrame([{
+        "system": "H2",
+        "method": "VQE",
+        "backend": "ideal_statevector",
+        "optimizer": "COBYLA",
+        "exact_energy_hartree": exact_energy,
+        "vqe_energy_hartree": result.fun,
+        "absolute_error_hartree": absolute_error,
+        "optimal_theta": result.x[0],
+        "iterations": result.nfev,
+    }])
+
+    df.to_csv(output_path, index=False)
+
+    print(f"\nResults saved to {output_path}")
