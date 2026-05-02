@@ -71,9 +71,17 @@ quantum-vqe-benchmark/
 
 ## Current Status
 
-- Implemented exact diagonalisation benchmark for H₂
-- Implemented first ideal-statevector VQE simulation
-- Achieved VQE error of approximately 4.43 × 10⁻⁹ Hartree against exact diagonalisation
+### First Successful Benchmark
+
+Implemented exact diagonalisation and first ideal-statevector VQE simulation for H₂.
+
+Results:
+
+- Exact ground-state energy: -1.8572750302023795 Hartree
+- VQE estimated energy: -1.8572750257726858 Hartree
+- Absolute error: 4.43 × 10⁻⁹ Hartree
+
+This confirms successful convergence of the first VQE implementation.
 ---
 
 ## Planned Analysis
