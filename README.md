@@ -82,6 +82,36 @@ Results:
 - Absolute error: 4.43 × 10⁻⁹ Hartree
 
 This confirms successful convergence of the first VQE implementation.
+
+### Noisy Simulator Benchmark
+
+A simple depolarising noise model was added using Qiskit Aer.
+
+Noise settings:
+
+- single-qubit gate error: 0.001
+- two-qubit gate error: 0.01
+
+Result:
+
+- noisy simulator energy: -1.848045374113591 Hartree
+- noisy simulator error: 9.23 × 10⁻³ Hartree
+
+This shows how even a simple noise model significantly worsens the VQE estimate compared with the ideal statevector simulation.
+
+### Energy Convergence Analysis
+
+The VQE optimisation was tracked over each iteration.
+
+The optimiser initially explores parameter space and briefly moves away from the true minimum before rapidly converging toward the exact ground-state energy.
+
+After approximately 8–10 iterations, the VQE estimate stabilises essentially on top of the exact result.
+
+This confirms:
+
+- the ansatz is sufficient
+- the optimiser is functioning correctly
+- the implementation is physically consistent
 ---
 
 ## Planned Analysis

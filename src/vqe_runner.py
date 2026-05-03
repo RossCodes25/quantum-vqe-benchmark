@@ -9,6 +9,8 @@ from exact_solver import exact_ground_state_energy
 from hamiltonians import h2_hamiltonian
 
 
+energy_history = []
+
 def h2_pauli_hamiltonian():
     """
     Same H2 Hamiltonian as SparsePauliOp for Qiskit.
@@ -26,6 +28,7 @@ def h2_pauli_hamiltonian():
 def energy_expectation(theta_value):
     """
     Compute <psi(theta)|H|psi(theta)> using an ideal statevector simulator.
+    Also store energy at each optimiser step.
     """
 
     circuit, theta = simple_h2_ansatz()
@@ -35,6 +38,8 @@ def energy_expectation(theta_value):
     hamiltonian = h2_pauli_hamiltonian()
 
     energy = np.real(state.expectation_value(hamiltonian))
+
+    energy_history.append(energy)
 
     return energy
 
@@ -85,7 +90,18 @@ if __name__ == "__main__":
         "optimal_theta": result.x[0],
         "iterations": result.nfev,
     }])
+    history_path = Path("results/data/energy_convergence.csv")
 
+    history_df = pd.DataFrame({
+        "iteration": range(1, len(energy_history) + 1),
+        "energy_hartree": energy_history,
+        "exact_energy_hartree": exact_energy,
+        "absolute_error_hartree": [abs(e - exact_energy) for e in energy_history],
+    })
+
+    history_df.to_csv(history_path, index=False)
+
+    print(f"Energy convergence saved to {history_path}")
     df.to_csv(output_path, index=False)
 
     print(f"\nResults saved to {output_path}")
